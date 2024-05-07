@@ -10,7 +10,15 @@
         <local:PersonViewModel/>
     </Window.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding People}" AutoGenerateColumns="False" IsReadOnly="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <Button Content="Добавить нового сотрудника" Command="{Binding AddPersonCommand}"/>
+            <Button Content="Перейти к компаниям" Click="GoToCompanyWindow_Click"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding People}" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
@@ -25,7 +33,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Добавить нового сотрудника" Command="{Binding AddPersonCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Height="75" Width="142"/>
-        <Button Content="Перейти к компаниям" Click="GoToCompanyWindow_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Padding="5"/>
     </Grid>
 </Window>

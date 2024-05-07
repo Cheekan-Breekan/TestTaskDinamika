@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskDinamika.Wpf.ViewModels"
         mc:Ignorable="d"
-        Title="Информация о сотруднике" Width="500" Height="180">
+        Title="Информация о сотруднике" Width="500" Height="220">
     <Window.DataContext>
         <local:AddEditPersonViewModel/>
     </Window.DataContext>
