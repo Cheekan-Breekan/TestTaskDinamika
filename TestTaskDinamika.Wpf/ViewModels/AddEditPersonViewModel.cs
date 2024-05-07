@@ -37,8 +37,16 @@ public class AddEditPersonViewModel : BaseViewModel
     }
     private void SaveChanges(object param)
     {
-        using var context = new AppDbContext();
-        context.People.Update(Person);
-        context.SaveChanges();
+        try
+        {
+            using var context = new AppDbContext();
+            context.People.Update(Person);
+            context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            //логгирование
+        }
+        
     }
 }

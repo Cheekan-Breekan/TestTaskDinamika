@@ -30,8 +30,15 @@ public class CompanyViewModel : BaseViewModel
 
     public void SaveChanges()
     {
-        using var context = new AppDbContext();
-        context.Companies.UpdateRange(Companies);
-        context.SaveChanges();
+        try
+        {
+            using var context = new AppDbContext();
+            context.Companies.UpdateRange(Companies);
+            context.SaveChanges();
+        }
+        catch (Exception)
+        {
+            //логгирование
+        }
     }
 }
