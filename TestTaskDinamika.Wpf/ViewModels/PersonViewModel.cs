@@ -1,13 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TestTaskDinamika.Wpf.Data;
 using TestTaskDinamika.Wpf.Models;
+using TestTaskDinamika.Wpf.Views;
 
 namespace TestTaskDinamika.Wpf.ViewModels;
 public class PersonViewModel : BaseViewModel
 {
-    public ICommand SaveChangesCommand { get; private set; }
+    public ICommand EditPersonCommand { get; private set; }
+    public ICommand AddPersonCommand { get; private set; }
     private ObservableCollection<Person> _people;
     public ObservableCollection<Person> People
     {
@@ -18,30 +21,31 @@ public class PersonViewModel : BaseViewModel
             OnPropertyChanged(nameof(People));
         }
     }
-    private ObservableCollection<Company> _companies;
-    public ObservableCollection<Company> Companies
-    {
-        get { return _companies; }
-        set
-        {
-            _companies = value;
-            OnPropertyChanged(nameof(Companies));
-        }
-    }
     public PersonViewModel()
     {
         using var context = new AppDbContext();
         People = new ObservableCollection<Person>(context.People.Include(p => p.Company).ToList());
-        Companies = new ObservableCollection<Company>(context.Companies.Include(c => c.People).ToList());
 
-        SaveChangesCommand = new RelayCommand(param => SaveChanges());
+        EditPersonCommand = new RelayCommand(EditPerson);
+        AddPersonCommand = new RelayCommand(AddPerson);
     }
-    public void SaveChanges()
+    public void EditPerson(object param)
     {
-        using var context = new AppDbContext();
-        context.People.UpdateRange(People);
-        context.SaveChanges();
-
-        People = new ObservableCollection<Person>(context.People.Include(p => p.Company).ToList());
+        if (param is Person person)
+        {
+            var editPersonWindow = new AddEditPersonView();
+            var editPersonViewModel = new AddEditPersonViewModel();
+            editPersonViewModel.Person = person;
+            editPersonWindow.DataContext = editPersonViewModel;
+            editPersonWindow.ShowDialog();
+        }
+    }
+    public void AddPerson(object param)
+    {
+        var editPersonWindow = new AddEditPersonView();
+        var editPersonViewModel = new AddEditPersonViewModel();
+        editPersonViewModel.Person = new Person();
+        editPersonWindow.DataContext = editPersonViewModel;
+        editPersonWindow.ShowDialog();
     }
 }
