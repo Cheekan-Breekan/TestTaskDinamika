@@ -18,7 +18,7 @@ public class PersonViewModel : BaseViewModel
         set
         {
             _people = value;
-            OnPropertyChanged(nameof(People));
+            OnPropertyChanged();
         }
     }
     public PersonViewModel()

@@ -13,7 +13,7 @@ public class AddEditPersonViewModel : BaseViewModel
         set
         {
             _person = value;
-            OnPropertyChanged(nameof(Person));
+            OnPropertyChanged();
         }
     }
 
@@ -24,7 +24,7 @@ public class AddEditPersonViewModel : BaseViewModel
         set
         {
             _companies = value;
-            OnPropertyChanged(nameof(Companies));
+            OnPropertyChanged();
         }
     }
     public ICommand SaveChangesCommand { get; private set; }

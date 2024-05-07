@@ -16,7 +16,7 @@ public class CompanyViewModel : BaseViewModel
         set
         {
             _companies = value;
-            OnPropertyChanged(nameof(Companies));
+            OnPropertyChanged();
         }
     }
 
