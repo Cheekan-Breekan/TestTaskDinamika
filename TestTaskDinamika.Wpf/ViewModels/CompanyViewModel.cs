@@ -8,6 +8,7 @@ namespace TestTaskDinamika.Wpf.ViewModels;
 public class CompanyViewModel : BaseViewModel
 {
     public ICommand SaveChangesCommand { get; private set; }
+    public ICommand RefreshDataCommand { get; private set; }
 
     private ObservableCollection<Company> _companies;
     public ObservableCollection<Company> Companies
@@ -25,10 +26,11 @@ public class CompanyViewModel : BaseViewModel
         using var context = new AppDbContext();
         Companies = new ObservableCollection<Company>(context.Companies.Include(c => c.People).ToList());
 
-        SaveChangesCommand = new RelayCommand(param => SaveChanges());
+        SaveChangesCommand = new RelayCommand(SaveChanges);
+        RefreshDataCommand = new RelayCommand(RefreshData);
     }
 
-    public void SaveChanges()
+    private void SaveChanges(object param)
     {
         try
         {
@@ -40,5 +42,11 @@ public class CompanyViewModel : BaseViewModel
         {
             //логгирование
         }
+    }
+
+    private void RefreshData(object param)
+    {
+        using var context = new AppDbContext();
+        Companies = new ObservableCollection<Company>(context.Companies.Include(c => c.People).ToList());
     }
 }

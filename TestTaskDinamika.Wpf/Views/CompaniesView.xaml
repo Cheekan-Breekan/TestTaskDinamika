@@ -16,6 +16,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
             <Button Content="Сохранить изменения" Command="{Binding SaveChangesCommand}" />
+            <Button Content="Обновить данные" Command="{Binding RefreshDataCommand}"/>
             <Button Content="Перейти к сотрудникам" Click="GoToCompanyWindow_Click"/>
         </StackPanel>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Companies}" AutoGenerateColumns="False" ColumnWidth="*">

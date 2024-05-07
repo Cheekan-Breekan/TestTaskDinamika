@@ -16,6 +16,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
             <Button Content="Добавить нового сотрудника" Command="{Binding AddPersonCommand}"/>
+            <Button Content="Обновить данные" Command="{Binding RefreshDataCommand}"/>
             <Button Content="Перейти к компаниям" Click="GoToCompanyWindow_Click"/>
         </StackPanel>
         <DataGrid Grid.Row="1" ItemsSource="{Binding People}" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
