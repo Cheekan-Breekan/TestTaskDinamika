@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TestTaskDinamika.Wpf.Data;
+using TestTaskDinamika.Wpf.Logger;
 using TestTaskDinamika.Wpf.Models;
 
 namespace TestTaskDinamika.Wpf.ViewModels;
@@ -38,9 +39,9 @@ public class CompanyViewModel : BaseViewModel
             context.Companies.UpdateRange(Companies);
             context.SaveChanges();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            //логгирование
+            SimpleLogger.Log(ex.ToString());
         }
     }
 

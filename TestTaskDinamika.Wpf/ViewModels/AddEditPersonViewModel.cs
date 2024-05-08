@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TestTaskDinamika.Wpf.Data;
+using TestTaskDinamika.Wpf.Logger;
 using TestTaskDinamika.Wpf.Models;
 
 namespace TestTaskDinamika.Wpf.ViewModels;
@@ -45,7 +46,7 @@ public class AddEditPersonViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            //логгирование
+            SimpleLogger.Log(ex.ToString());
         }
         
     }
